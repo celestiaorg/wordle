@@ -1,0 +1,13 @@
+syntax = "proto3";
+package yazzyyaz.wordle.wordle;
+
+option go_package = "github.com/YazzyYaz/wordle/x/wordle/types";
+
+message Guess {
+  string index = 1; 
+  string word = 2; 
+  string submitter = 3; 
+  string count = 4; 
+  
+}
+

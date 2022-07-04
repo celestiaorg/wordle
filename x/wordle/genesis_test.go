@@ -14,6 +14,22 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		WordleList: []types.Wordle{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		GuessList: []types.Guess{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +41,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.WordleList, got.WordleList)
+	require.ElementsMatch(t, genesisState.GuessList, got.GuessList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

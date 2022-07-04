@@ -4,9 +4,13 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgSubmitGuess } from "./types/wordle/tx";
+import { MsgSubmitWordle } from "./types/wordle/tx";
 
 
 const types = [
+  ["/yazzyyaz.wordle.wordle.MsgSubmitGuess", MsgSubmitGuess],
+  ["/yazzyyaz.wordle.wordle.MsgSubmitWordle", MsgSubmitWordle],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,6 +43,8 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgSubmitGuess: (data: MsgSubmitGuess): EncodeObject => ({ typeUrl: "/yazzyyaz.wordle.wordle.MsgSubmitGuess", value: MsgSubmitGuess.fromPartial( data ) }),
+    msgSubmitWordle: (data: MsgSubmitWordle): EncodeObject => ({ typeUrl: "/yazzyyaz.wordle.wordle.MsgSubmitWordle", value: MsgSubmitWordle.fromPartial( data ) }),
     
   };
 };

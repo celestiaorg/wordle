@@ -30425,6 +30425,179 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /YazzyYaz/wordle/wordle/guess:
+    get:
+      summary: Queries a list of Guess items.
+      operationId: YazzyyazWordleWordleGuessAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              guess:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    word:
+                      type: string
+                    submitter:
+                      type: string
+                    count:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/YazzyYaz/wordle/wordle/guess/{index}':
+    get:
+      summary: Queries a Guess by index.
+      operationId: YazzyyazWordleWordleGuess
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              guess:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  word:
+                    type: string
+                  submitter:
+                    type: string
+                  count:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
   /YazzyYaz/wordle/wordle/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -30459,6 +30632,175 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      tags:
+        - Query
+  /YazzyYaz/wordle/wordle/wordle:
+    get:
+      summary: Queries a list of Wordle items.
+      operationId: YazzyyazWordleWordleWordleAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              wordle:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    index:
+                      type: string
+                    word:
+                      type: string
+                    submitter:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/YazzyYaz/wordle/wordle/wordle/{index}':
+    get:
+      summary: Queries a Wordle by index.
+      operationId: YazzyyazWordleWordleWordle
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              wordle:
+                type: object
+                properties:
+                  index:
+                    type: string
+                  word:
+                    type: string
+                  submitter:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
       tags:
         - Query
 definitions:
@@ -51919,9 +52261,135 @@ definitions:
     title: >-
       SignatureCounts contains information about signature reporting for a
       number of blocks
+  yazzyyaz.wordle.wordle.Guess:
+    type: object
+    properties:
+      index:
+        type: string
+      word:
+        type: string
+      submitter:
+        type: string
+      count:
+        type: string
+  yazzyyaz.wordle.wordle.MsgSubmitGuessResponse:
+    type: object
+    properties:
+      title:
+        type: string
+      body:
+        type: string
+  yazzyyaz.wordle.wordle.MsgSubmitWordleResponse:
+    type: object
   yazzyyaz.wordle.wordle.Params:
     type: object
     description: Params defines the parameters for the module.
+  yazzyyaz.wordle.wordle.QueryAllGuessResponse:
+    type: object
+    properties:
+      guess:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            word:
+              type: string
+            submitter:
+              type: string
+            count:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  yazzyyaz.wordle.wordle.QueryAllWordleResponse:
+    type: object
+    properties:
+      wordle:
+        type: array
+        items:
+          type: object
+          properties:
+            index:
+              type: string
+            word:
+              type: string
+            submitter:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  yazzyyaz.wordle.wordle.QueryGetGuessResponse:
+    type: object
+    properties:
+      guess:
+        type: object
+        properties:
+          index:
+            type: string
+          word:
+            type: string
+          submitter:
+            type: string
+          count:
+            type: string
+  yazzyyaz.wordle.wordle.QueryGetWordleResponse:
+    type: object
+    properties:
+      wordle:
+        type: object
+        properties:
+          index:
+            type: string
+          word:
+            type: string
+          submitter:
+            type: string
   yazzyyaz.wordle.wordle.QueryParamsResponse:
     type: object
     properties:
@@ -51929,3 +52397,12 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  yazzyyaz.wordle.wordle.Wordle:
+    type: object
+    properties:
+      index:
+        type: string
+      word:
+        type: string
+      submitter:
+        type: string
