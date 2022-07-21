@@ -105,7 +105,7 @@ In this current design, we implement the following rules:
 * Every address will have 6 tries to guess the word
 * It must be a five-letter word.  
 * Whoever guesses the word correctly before their
-  6 tries are over gets an award of 100 TIA tokens.
+  6 tries are over gets an award of 100 WORDLE tokens.
 
 We will go over the architecture to achieve this further
 in the guide. But for now, we will get started setting up
